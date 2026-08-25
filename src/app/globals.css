@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-gold: #cfb153;
+  --color-gold-dark: #caa920;
+  --color-gold-wash: #fbf9f2;
+  --color-field-border: #d8d8d8;
+  --color-field-text: #52596a;
+  --color-muted: #777777;
+  --font-sans: var(--font-open-sans), Arial, Helvetica, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/*
+ * The only rules left in CSS. The flag is a striped repeating-linear-gradient
+ * plus a star field built from a tiled radial-gradient; Tailwind has no
+ * utilities for multi-layer or repeating gradients.
+ */
+.us-flag {
+  display: block;
+  width: 27px;
+  height: 18px;
+  overflow: hidden;
+  border: 1px solid #dddddd;
+  background: repeating-linear-gradient(
+    to bottom,
+    #e83145 0,
+    #e83145 1.4px,
+    #ffffff 1.4px,
+    #ffffff 2.8px
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.flag-canton {
+  display: block;
+  width: 11px;
+  height: 9px;
+  background:
+    radial-gradient(circle, #ffffff 0 0.55px, transparent 0.7px) 1px 1px / 3px
+      3px,
+    #3e5eae;
 }
