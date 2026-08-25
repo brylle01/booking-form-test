@@ -81,6 +81,26 @@ export function normalizePhone(phone: string) {
   return digits;
 }
 
+/**
+ * Masks whatever was typed as `+1 774 415 3244`. A separator is only added once
+ * a digit follows it, so backspacing over a space deletes the digit before it
+ * instead of having the mask immediately put the space back.
+ */
+export function formatPhone(phone: string) {
+  const digits = phone
+    .replace(/\D/g, "")
+    .replace(/^1/, "")
+    .slice(0, PHONE_DIGITS);
+
+  if (!digits) {
+    return "";
+  }
+
+  const groups = [digits.slice(0, 3), digits.slice(3, 6), digits.slice(6)];
+
+  return `+1 ${groups.filter(Boolean).join(" ")}`;
+}
+
 export function isValidPhone(phone: string) {
   return normalizePhone(phone).length === PHONE_DIGITS;
 }

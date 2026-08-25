@@ -13,6 +13,7 @@ import {
   EMPTY_BOOKING,
   PHONE_DIGITS,
   currentHourTime,
+  formatPhone,
   isValidPhone,
   normalizePhone,
   validateBookingPayload,
@@ -177,12 +178,14 @@ export function useBookingForm() {
 
   const onPhoneChange = useCallback(
     (value: string) => {
-      onFieldChange("phone", value);
+      const masked = formatPhone(value);
+
+      onFieldChange("phone", masked);
       setCustomer(null);
       setCustomerStatus("new");
 
       // Clearing the number clears whatever the lookup filled in for us.
-      if (normalizePhone(value).length < PHONE_DIGITS) {
+      if (normalizePhone(masked).length < PHONE_DIGITS) {
         setForm((current) => ({
           ...current,
           firstName: "",
